@@ -1,0 +1,40 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    ports:
+      - 8080:8080
+      - 8081:8081
+    env_file:
+      - .env
+    volumes:
+      - ./:/go/src/app
+    tty: true
+    depends_on:
+      - db
+  db:
+    image: postgres:16
+    restart: always
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      TZ: Asia/Tokyo
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+  test_db:
+    image: postgres:16
+    restart: always
+    container_name: test_db
+    ports:
+      - 54321:5432
+    environment:
+      POSTGRES_USER: ${TEST_DB_USER}
+      POSTGRES_PASSWORD: ${TEST_DB_PASSWORD}
+      POSTGRES_DB: ${TEST_DB_NAME}
+      TZ: Asia/Tokyo

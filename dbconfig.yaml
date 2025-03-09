@@ -1,0 +1,9 @@
+production:
+  dialect: postgres
+  datasource: "postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_NAME}?sslmode=disable"
+  dir: migrations
+
+test:
+  dialect: postgres
+  datasource: "postgres://${TEST_DB_USER}:${TEST_DB_PASSWORD}@${TEST_DB_HOST}:5432/${TEST_DB_NAME}?sslmode=disable"
+  dir: migrations

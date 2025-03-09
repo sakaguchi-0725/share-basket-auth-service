@@ -1,0 +1,14 @@
+syntax = "proto3";
+package auth;
+
+option go_package = "./gen";
+
+service AuthService {
+  rpc VerifyToken(VerifyTokenRequest) returns (VerifyTokenResponse);
+}
+
+message VerifyTokenRequest {}
+
+message VerifyTokenResponse {
+  string userID = 1;
+}
